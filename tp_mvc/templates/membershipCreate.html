@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Tambah Keanggotaan</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/popper.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.php">Students</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../ukm.php">UKM</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../membership.php">Membership</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="col-lg-6 m-auto">
+    <form method="post" action="../membership.php">
+      <br><br>
+      <div class="card">
+        <div class="card-header bg-primary">
+          <h1 class="text-white text-center">Tambah Keanggotaan</h1>
+        </div><br>
+
+        <label>Mahasiswa:</label>
+        <select name="student_id" class="form-control" required>
+          <!-- Diisi secara dinamis dengan PHP -->
+          <?php foreach ($students as $student): ?>
+            <option value="<?= $student['id_student'] ?>"><?= $student['name'] ?> (<?= $student['nim'] ?>)</option>
+          <?php endforeach; ?>
+        </select><br>
+
+        <label>UKM:</label>
+        <select name="ukm_id" class="form-control" required>
+          <!-- Diisi secara dinamis dengan PHP -->
+          <?php foreach ($ukms as $ukm): ?>
+            <option value="<?= $ukm['id_ukm'] ?>"><?= $ukm['name'] ?></option>
+          <?php endforeach; ?>
+        </select><br>
+
+        <label>Tanggal Bergabung:</label>
+        <input type="date" name="join_date" class="form-control" required><br>
+
+        <label>Peran:</label>
+        <select name="role" class="form-control" required>
+          <option value="anggota">Anggota</option>
+          <option value="pengurus">Pengurus</option>
+        </select><br>
+
+        <button class="btn btn-success" type="submit" name="add">Submit</button><br>
+        <a class="btn btn-info" href="../membership.php">Cancel</a><br>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
