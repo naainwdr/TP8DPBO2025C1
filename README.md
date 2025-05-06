@@ -32,37 +32,56 @@ Database ini menyimpan 3 tabel.
 * **ukm → memberships**: 1 UKM bisa punya banyak anggota
 
 # Penjelasan Struktural File
-- config/db.php
-   Berisi konfigurasi koneksi database menggunakan PDO. File ini digunakan oleh seluruh model untuk mengakses database.
-- class/
-   Folder ini berisi file PHP class model untuk masing-masing entitas di database, yaitu Artist.php, Album.php, Song.php, Studio.php, Recording.php. Masing-masing class memiliki fungsi CRUD (Create, Read, Update, Delete) yang berinteraksi langsung dengan database melalui koneksi dari db.php.
-- database/db_song.sql
-   Berisi kumpulan query SQL (DDL) untuk membuat struktur tabel-tabel yang digunakan dalam aplikasi, termasuk foreign key dan relasi antar tabel.
-- view/
-   Folder ini berisi subfolder untuk setiap entitas utama, yaitu view/Artist/, view/Album/, view/Song/, view/Studio/, view/Recording/. Masing-masing folder memiliki 4 file:
-   - addX.php untuk form tambah data
-   - editX.php untuk form edit data
-   - deleteX.php untuk menghapus data
-   - viewX.php untuk menampilkan data dalam tabel
-   (X menyesuaikan nama entitas, misalnya Artist, Album, dsb)
-- index.php
-   Halaman utama aplikasi. File ini menangani navigasi halaman berdasarkan parameter page di URL dan me-load view yang sesuai.
-- style.css
-   File CSS untuk styling tampilan.
+ TP_MVC - Sistem Manajemen Keanggotaan Mahasiswa dalam UKM (MVC Pattern)
+
+### 1. controllers/
+Folder ini berisi **controller**, yaitu logika utama yang menghubungkan antara data (model) dan tampilan (view).
+
+- Membership.controller.php - Mengelola data keanggotaan (tambah, hapus, update).
+- Student.controller.php - Mengelola data mahasiswa.
+- UKM.controller.php - Mengelola data UKM.
+
+### 2. models/
+Berisi **kelas model** untuk berinteraksi dengan database.
+
+- DB.class.php - Koneksi database dan eksekusi query dasar.
+- Membership.class.php - Fungsi CRUD untuk tabel memberships.
+- Student.class.php - Fungsi CRUD untuk tabel students.
+- UKM.class.php - Fungsi CRUD untuk tabel ukm.
+
+### 3. views/
+Berisi **kelas view** (PHP) yang bertugas menampilkan data menggunakan template HTML.
+
+- Membership.view.php, Student.view.php, UKM.view.php - View khusus tiap entitas.
+- Template.class.php - (Opsional) View umum untuk membungkus halaman (header/footer).
+- **NOTE:** Di sinilah kamu juga harus menyimpan file HTML dengan ekstensi .php jika ingin menggunakan PHP di dalamnya.
+
+### 4. templates/
+Berisi **template HTML statis** (tanpa pemrosesan PHP langsung).
+- membership.html, membershipCreate.html – Harus diubah menjadi .php untuk menampilkan data dinamis.
+
+### 5. assets/
+Berisi file frontend seperti JavaScript dan CSS.
+- js/ – Folder untuk file JS tambahan (misal: bootstrap.min.js, jquery.min.js).
 
 
-# Penjelasan Alur Program
+### 6. File Utama (Root Files)
+- index.php - Halaman utama mahasiswa.
+- membership.php - Endpoint untuk keanggotaan, memanggil MembershipController.
+- conf.php - Konfigurasi database global.
 
-1. User membuka privateindex.phpprivate sebagai halaman utama navigasi
-2. Memilih entitas (Artist, Album, dll) akan diarahkan ke folder privateview/<entitas>/viewXXX.phpprivate
-3. Di halaman tersebut dapat melihat daftar data dan melakukan:
-   - Mencari data
-   - Tambah data
-   - Edit data
-   - Hapus data
-4. Untuk melakukan search terdapat search bar untuk mencari berdasarkan judul. Pencarian dikirim dengan metode GET, dan hasil ditampilkan dalam bentuk filter
-5. Saat tambah/edit, jika entitas memiliki relasi, akan muncul dropdown (misal pilih artist saat buat album)
-6. Data diproses melalui method-method class di class/(namaEntitas) dengan koneksi dari config/db
+
+
+# Alur Program
+Tambah, edit, dan hapus mahasiswa.
+
+Tambah, edit, dan hapus UKM.
+
+Tambah dan kelola keanggotaan mahasiswa dalam UKM.
 
 # Dokumentasi Program
+![image](https://github.com/user-attachments/assets/4576d931-0fd4-4432-8bcc-d0be02518c80)
+
+https://github.com/user-attachments/assets/bdefdee0-f4c9-47ee-930a-e19e9e53a65e
+
 
